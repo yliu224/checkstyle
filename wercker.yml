@@ -96,3 +96,4 @@ build:
         && cd ../../ && mvn clean install -Pno-validations
         && cd contribution/checkstyle-tester
         && groovy ./launch.groovy --listOfProjects projects-for-wercker.properties --checksyleCfg checks-nonjavadoc-error.xml
+        && du -hs ${WERCKER_CACHE_DIR}
