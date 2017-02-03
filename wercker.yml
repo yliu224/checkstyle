@@ -7,6 +7,7 @@ build:
       code: |-
         export MAVEN_OPTS="-Dmaven.repo.local=${WERCKER_CACHE_DIR}"
         mvn -version
+        du -hs ${WERCKER_CACHE_DIR}/*
 
   - script:
       name: install groovy
@@ -95,5 +96,5 @@ build:
         && git clone https://github.com/checkstyle/contribution && cd contribution/checkstyle-tester
         && cd ../../ && mvn clean install -Pno-validations
         && cd contribution/checkstyle-tester
-        && groovy ./launch.groovy --listOfProjects projects-for-wercker.properties --checksyleCfg checks-nonjavadoc-error.xml
-        && du -hs ${WERCKER_CACHE_DIR}
+        && groovy ./launch.groovy --listOfProjects projects-for-wercker.properties --checkstyleCfg checks-nonjavadoc-error.xml
+        && du -hs ${WERCKER_CACHE_DIR}/*
