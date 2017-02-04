@@ -7,7 +7,8 @@ build:
       code: |-
         export MAVEN_OPTS="-Dmaven.repo.local=${WERCKER_CACHE_DIR}"
         mvn -version
-        du -hs ${WERCKER_CACHE_DIR}/*
+        du -hs ${WERCKER_CACHE_DIR}
+        du -hs ${WERCKER_CACHE_DIR}/* | sort -h
 
   - script:
       name: install groovy
@@ -104,4 +105,4 @@ build:
       code:  |-
         find ${WERCKER_CACHE_DIR} -type d -name "*-SNAPSHOT" -delete
         du -hs ${WERCKER_CACHE_DIR}
-        du -hs ${WERCKER_CACHE_DIR}/*
+        du -hs ${WERCKER_CACHE_DIR}/* | sort -h
