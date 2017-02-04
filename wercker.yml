@@ -103,6 +103,6 @@ build:
   - script:
       name: Cleanup maven local repo
       code:  |-
-        find ${WERCKER_CACHE_DIR} -type d -name "*-SNAPSHOT" -delete
+        find ${WERCKER_CACHE_DIR} -type d -name "*SNAPSHOT" -ls -exec rm -rf {} +
         du -hs ${WERCKER_CACHE_DIR}
         du -hs ${WERCKER_CACHE_DIR}/* | sort -h
