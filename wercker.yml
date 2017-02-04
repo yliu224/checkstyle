@@ -97,4 +97,11 @@ build:
         && cd ../../ && mvn clean install -Pno-validations
         && cd contribution/checkstyle-tester
         && groovy ./launch.groovy --listOfProjects projects-for-wercker.properties --checkstyleCfg checks-nonjavadoc-error.xml
-        && du -hs ${WERCKER_CACHE_DIR}/*
+
+  # Cleanup
+  - script:
+      name: Cleanup maven local repo
+      code:  |-
+        find ${WERCKER_CACHE_DIR} -type d -name "*-SNAPSHOT" -delete
+        du -hs ${WERCKER_CACHE_DIR}
+        du -hs ${WERCKER_CACHE_DIR}/*
