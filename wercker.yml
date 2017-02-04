@@ -108,3 +108,8 @@ build:
         du -hs ${WERCKER_CACHE_DIR}
         echo "------"
         du -hs ${WERCKER_CACHE_DIR}/* | sort -h
+        echo "------"
+        ls -la
+        echo "------"
+        du -hs * | sort -h
+
