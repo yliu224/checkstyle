@@ -8,6 +8,7 @@ build:
         export MAVEN_OPTS="-Dmaven.repo.local=${WERCKER_CACHE_DIR}"
         mvn -version
         du -hs ${WERCKER_CACHE_DIR}
+        echo "------"
         du -hs ${WERCKER_CACHE_DIR}/* | sort -h
 
   - script:
@@ -105,4 +106,5 @@ build:
       code:  |-
         find ${WERCKER_CACHE_DIR} -type d -name "*SNAPSHOT" -ls -exec rm -rf {} +
         du -hs ${WERCKER_CACHE_DIR}
+        echo "------"
         du -hs ${WERCKER_CACHE_DIR}/* | sort -h
