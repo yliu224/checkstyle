@@ -21,8 +21,6 @@ package com.puppycrawl.tools.checkstyle.checks.blocks;
 
 import java.util.Locale;
 
-import org.apache.commons.beanutils.ConversionException;
-
 import com.puppycrawl.tools.checkstyle.api.AbstractCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.Scope;
@@ -116,14 +114,14 @@ public class RightCurlyCheck extends AbstractCheck {
     /**
      * Set the option to enforce.
      * @param optionStr string to decode option from
-     * @throws ConversionException if unable to decode
+     * @throws IllegalArgumentException if unable to decode
      */
     public void setOption(String optionStr) {
         try {
             option = RightCurlyOption.valueOf(optionStr.trim().toUpperCase(Locale.ENGLISH));
         }
         catch (IllegalArgumentException iae) {
-            throw new ConversionException("unable to parse " + optionStr, iae);
+            throw new IllegalArgumentException("unable to parse " + optionStr, iae);
         }
     }
 
@@ -176,15 +174,7 @@ public class RightCurlyCheck extends AbstractCheck {
         final DetailAST rcurly = details.rcurly;
 
         if (rcurly != null) {
-            final String violation;
-            if (shouldStartLine) {
-                final String targetSourceLine = getLines()[rcurly.getLineNo() - 1];
-                violation = validate(details, option, true, targetSourceLine);
-            }
-            else {
-                violation = validate(details, option, false, "");
-            }
-
+            final String violation = validate(details);
             if (!violation.isEmpty()) {
                 log(rcurly, violation, "}", rcurly.getColumnNo() + 1);
             }
@@ -194,21 +184,16 @@ public class RightCurlyCheck extends AbstractCheck {
     /**
      * Does general validation.
      * @param details for validation.
-     * @param bracePolicy for placing the right curly brace.
-     * @param shouldStartLine do we need to check if right curly starts line.
-     * @param targetSourceLine line that we need to check if shouldStartLine is true.
      * @return violation message or empty string
      *     if there was not violation during validation.
      */
-    private static String validate(Details details, RightCurlyOption bracePolicy,
-                                   boolean shouldStartLine, String targetSourceLine) {
+    private String validate(Details details) {
         final DetailAST rcurly = details.rcurly;
         final DetailAST lcurly = details.lcurly;
         final DetailAST nextToken = details.nextToken;
         final boolean shouldCheckLastRcurly = details.shouldCheckLastRcurly;
         String violation = "";
-
-        if (bracePolicy == RightCurlyOption.SAME
+        if (option == RightCurlyOption.SAME
                 && !hasLineBreakBefore(rcurly)
                 && lcurly.getLineNo() != rcurly.getLineNo()) {
             violation = MSG_KEY_LINE_BREAK_BEFORE;
@@ -218,14 +203,17 @@ public class RightCurlyCheck extends AbstractCheck {
                 violation = MSG_KEY_LINE_ALONE;
             }
         }
-        else if (shouldBeOnSameLine(bracePolicy, details)) {
+        else if (shouldBeOnSameLine(option, details)) {
             violation = MSG_KEY_LINE_SAME;
         }
-        else if (shouldBeAloneOnLine(bracePolicy, details)) {
+        else if (shouldBeAloneOnLine(option, details)) {
             violation = MSG_KEY_LINE_ALONE;
         }
-        else if (shouldStartLine && !isOnStartOfLine(details, targetSourceLine)) {
-            violation = MSG_KEY_LINE_NEW;
+        else if (shouldStartLine) {
+            final String targetSourceLine = getLines()[rcurly.getLineNo() - 1];
+            if (!isOnStartOfLine(details, targetSourceLine)) {
+                violation = MSG_KEY_LINE_NEW;
+            }
         }
         return violation;
     }

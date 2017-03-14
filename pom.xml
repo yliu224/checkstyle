@@ -22,7 +22,7 @@
 
   <groupId>com.puppycrawl.tools</groupId>
   <artifactId>checkstyle</artifactId>
-  <version>7.6-SNAPSHOT</version>
+  <version>7.7-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>checkstyle</name>
@@ -201,9 +201,9 @@
     <maven.site.plugin.version>3.6</maven.site.plugin.version>
     <maven.findbugs.plugin.version>3.0.4</maven.findbugs.plugin.version>
     <maven.pmd.plugin.version>3.7</maven.pmd.plugin.version>
-    <maven.jacoco.plugin.version>0.7.8</maven.jacoco.plugin.version>
+    <maven.jacoco.plugin.version>0.7.9</maven.jacoco.plugin.version>
     <maven.checkstyle.plugin.version>2.17</maven.checkstyle.plugin.version>
-    <maven.sevntu.checkstyle.plugin.version>1.23.0</maven.sevntu.checkstyle.plugin.version>
+    <maven.sevntu.checkstyle.plugin.version>1.23.1</maven.sevntu.checkstyle.plugin.version>
     <maven.versions.plugin.version>2.3</maven.versions.plugin.version>
     <java.version>1.8</java.version>
     <tools.jar.version>${java.version}.0</tools.jar.version>
@@ -257,7 +257,7 @@
     <dependency>
       <groupId>org.apache.ant</groupId>
       <artifactId>ant</artifactId>
-      <version>1.10.0</version>
+      <version>1.10.1</version>
       <scope>provided</scope>
     </dependency>
 
@@ -277,7 +277,7 @@
     <dependency>
       <groupId>nl.jqno.equalsverifier</groupId>
       <artifactId>equalsverifier</artifactId>
-      <version>2.2</version>
+      <version>2.2.1</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -307,7 +307,7 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-simple</artifactId>
-      <version>1.7.22</version>
+      <version>1.7.23</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -467,7 +467,7 @@
           <dependency>
             <groupId>com.puppycrawl.tools</groupId>
             <artifactId>checkstyle</artifactId>
-            <version>7.5.1</version>
+            <version>7.6</version>
           </dependency>
         </dependencies>
         <!-- Specifying configuration here will take effect on the execution of "mvn checkstyle:checkstyle",
@@ -598,7 +598,7 @@
       <plugin>
           <groupId>org.sonatype.plugins</groupId>
           <artifactId>nexus-staging-maven-plugin</artifactId>
-          <version>1.6.7</version>
+          <version>1.6.8</version>
           <extensions>true</extensions>
           <configuration>
               <!-- serverId is ID of a <server> section from Maven's settings.xml
@@ -624,7 +624,7 @@
             <!-- add support for ssh/scp -->
             <groupId>org.apache.maven.wagon</groupId>
             <artifactId>wagon-ssh</artifactId>
-            <version>2.10</version>
+            <version>2.12</version>
           </dependency>
         </dependencies>
       </plugin>
@@ -710,7 +710,7 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>build-helper-maven-plugin</artifactId>
-        <version>1.12</version>
+        <version>3.0.0</version>
         <executions>
           <execution>
             <id>add-source</id>
@@ -961,7 +961,7 @@
       <plugin>
       <groupId>de.thetaphi</groupId>
       <artifactId>forbiddenapis</artifactId>
-      <version>2.2</version>
+      <version>2.3</version>
       <configuration>
         <targetVersion>${java.version}</targetVersion>
         <failOnUnsupportedJava>false</failOnUnsupportedJava>
@@ -1357,7 +1357,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-shade-plugin</artifactId>
-            <version>2.4.3</version>
+            <version>3.0.0</version>
             <executions>
               <execution>
                 <phase>package</phase>
@@ -1452,8 +1452,6 @@
                   <exclude>com/puppycrawl/tools/checkstyle/gui/ParseTreeTableModel*.class</exclude>
                   <exclude>com/puppycrawl/tools/checkstyle/gui/TreeTableCellRenderer*.class</exclude>
                   <exclude>com/puppycrawl/tools/checkstyle/gui/TreeTableModelAdapter*.class</exclude>
-                  <!-- GUI model classes without tests -->
-                  <exclude>com/puppycrawl/tools/checkstyle/gui/MainFrameModel*.class</exclude>
                   <!-- deprecated classes -->
                   <exclude>com/puppycrawl/tools/checkstyle/checks/AbstractFormatCheck.class</exclude>
                   <exclude>com/puppycrawl/tools/checkstyle/checks/AbstractDeclarationCollector*.class</exclude>
