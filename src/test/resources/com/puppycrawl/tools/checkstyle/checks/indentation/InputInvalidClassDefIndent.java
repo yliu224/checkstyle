@@ -193,3 +193,10 @@ class InputValidClassDefIndent4d //indent:0 exp:4 warn
 { //indent:0 exp:0
 
 } //indent:0 exp:0
+
+class InputInvalidClassDenIndentD { //indent:0 exp:0
+    void method() {//indent:4 exp:4
+        new Integer("10" //indent:8 exp:8
++ "02"+"90"+"1"); //indent:0 exp:8 warn
+    }//indent:4 exp:4
+}//indent:0 exp:0

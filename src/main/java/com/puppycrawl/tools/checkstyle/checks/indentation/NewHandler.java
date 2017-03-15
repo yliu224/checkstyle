@@ -45,8 +45,16 @@ public class NewHandler extends AbstractExpressionHandler {
     @Override
     public void checkIndentation() {
         final DetailAST type = getMainAst().getFirstChild();
+        DetailAST elist=type;
+        while(elist!=null){
+            if(elist.getText().equals("ELIST")) break;
+            elist=elist.getNextSibling();
+        }
         if (type != null) {
             checkExpressionSubtree(type, getIndent(), false, false);
+        }
+        if(elist!=null){
+            checkExpressionSubtree(elist, getIndent(),false,false);
         }
 
         final DetailAST lparen = getMainAst().findFirstToken(TokenTypes.LPAREN);
