@@ -1076,6 +1076,9 @@ public class IndentationCheckTest extends BaseCheckTestSupport {
             "257: " + getCheckMessage(MSG_CHILD_ERROR, "if", 0, 12),
             "258: " + getCheckMessage(MSG_CHILD_ERROR, "if", 0, 12),
             "259: " + getCheckMessage(MSG_ERROR, "if rcurly", 0, 8),
+
+            "265: " + getCheckMessage(MSG_CHILD_ERROR,"method call",0, 12),
+            "267: " + getCheckMessage(MSG_CHILD_ERROR,"method call",0, 12),
         };
         verifyWarns(checkConfig, fileName, expected);
     }

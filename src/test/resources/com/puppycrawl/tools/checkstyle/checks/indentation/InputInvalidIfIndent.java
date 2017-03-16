@@ -260,4 +260,10 @@ System.getProperty("blah");  //indent:0 exp:12 warn
 
     } //indent:4 exp:4
 
+    public void IndentWithoutCurlies() {//indent:4 exp:4
+        if (true) //indent:8 exp:8
+System.out.print("blah"); //indent:0 exp:12 warn
+        else//indent:8 exp:8
+System.getProperty("blah"); //indent:0 exp:12 warn
+    }//indent:4 exp:4
 } //indent:0 exp:0

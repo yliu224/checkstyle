@@ -170,7 +170,9 @@ public class MethodCallHandler extends AbstractExpressionHandler {
     @Override
     public void checkIndentation() {
         final DetailAST exprNode = getMainAst().getParent();
-        if (exprNode.getParent().getType() == TokenTypes.SLIST) {
+        if (exprNode.getParent().getType() == TokenTypes.SLIST||
+                exprNode.getParent().getType()==TokenTypes.LITERAL_IF||
+                exprNode.getParent().getType()==TokenTypes.LITERAL_ELSE) {
             final DetailAST methodName = getMainAst().getFirstChild();
             checkExpressionSubtree(methodName, getIndent(), false, false);
 
